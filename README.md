@@ -1,5 +1,5 @@
 # Pruebas automatizadas de UI para la aplicación web de Urban Routes
-Pruebas automatizadas para las características de Urban Routes al solicitar un taxi de categoría "Comfort". 
+Pruebas automatizadas de UI para las características de Urban Routes al solicitar un taxi de categoría "Comfort". 
 
 ### Requisitos:
 - Necesitas tener instalados el paquete pytest para ejecutar las pruebas.
@@ -23,8 +23,9 @@ Pruebas automatizadas para las características de Urban Routes al solicitar un 
 
 - Realizar una copia local del repositorio GitHub.
 - Instalar el paquete pytest.
+- Actualizar la URL del servidor contenida en la variable urban_routes_url del archivo data.py.
 - Para realizar las pruebas de manera grupal: hacer click en el botón Run de la clase "TestUrbanRoutes" o hacer click en Run con la opción current file seleccionada.
-- Para realizar pruebas individuales: desplegar la clase TestUrbanRoutes y hacer click en Run en la prueba de interés.
+- Para realizar pruebas individuales: desplegar la clase "TestUrbanRoutes" y hacer click en Run en la prueba de interés.
 
-### Desarrollado por:
-Ibrahim Rondón - c13 QA Engineer, TripleTen
+
+*Desarrollado por: Ibrahim Rondón - c13 QA Engineer, TripleTen*

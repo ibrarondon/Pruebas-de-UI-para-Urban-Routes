@@ -4,8 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-
-
 # no modificar
 def retrieve_phone_code(driver) -> str:
     """Este código devuelve un número de confirmación de teléfono y lo devuelve como un string.
@@ -32,7 +30,6 @@ def retrieve_phone_code(driver) -> str:
             raise Exception("No se encontró el código de confirmación del teléfono.\n"
                             "Utiliza 'retrieve_phone_code' solo después de haber solicitado el código en tu aplicación.")
         return code
-
 
 class UrbanRoutesPage:
     from_field = (By.ID, 'from')
@@ -168,10 +165,11 @@ class TestUrbanRoutes:
     @classmethod
     def setup_class(cls):
         # no lo modifiques, ya que necesitamos un registro adicional habilitado para recuperar el código de confirmación del teléfono
-        from selenium.webdriver import DesiredCapabilities
-        capabilities = DesiredCapabilities.CHROME
-        capabilities["goog:loggingPrefs"] = {'performance': 'ALL'}
-        cls.driver = webdriver.Chrome()
+        from selenium.webdriver import ChromeOptions
+        options = ChromeOptions() #Agregado ChromeOptions en vez de DesiredCapabilities
+        options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
+        # Ahora usamos 'options' en lugar de 'desired_capabilities'
+        cls.driver = webdriver.Chrome(options=options)
         cls.driver.maximize_window()
 
     def test_set_route(self):   #Test to set address from and address to in Urban Routes form
