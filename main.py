@@ -1,9 +1,9 @@
 import data
 from selenium import webdriver
-#from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+
 
 
 # no modificar
@@ -58,6 +58,7 @@ class UrbanRoutesPage:
     ice_cream_value = (By.XPATH,"//*[@class='r-counter-container'][contains(., 'Helado')]//*[@class='counter-value']") #Icecream count value
     final_request_taxi_button = (By.CLASS_NAME,"smart-button-main") #Blue button to place the request for a taxi
     cancel_taxi_button = (By.CSS_SELECTOR,"img[alt='close']") #Cancel taxi button in pop-up window
+    detail_order_button = (By.CSS_SELECTOR, "img[alt='burger']")
     order_number = (By.CLASS_NAME, "number")  #Order number for taxi request
 
     def __init__(self, driver):
@@ -152,11 +153,11 @@ class UrbanRoutesPage:
         self.driver.find_element(*self.final_request_taxi_button).click()
 
     def verify_taxi_request(self): #Verifies the request was placed and the user is waiting
-        WebDriverWait(self.driver,3).until(expected_conditions.visibility_of_element_located(self.cancel_taxi_button))
+        WebDriverWait(self.driver,3).until(expected_conditions.element_to_be_clickable(self.cancel_taxi_button))
         return True
 
-    def get_taxi_info(self):
-        WebDriverWait(self.driver, 30).until(expected_conditions.visibility_of_element_located(self.order_number))
+    def get_taxi_info(self): #Confirms a taxi was requested and an order number was created
+        WebDriverWait(self.driver, 40).until(expected_conditions.visibility_of_element_located(self.order_number))
         return True
 
 
@@ -285,12 +286,15 @@ class TestUrbanRoutes:
         assert phone_number == data.phone_number
         routes_page.add_credit_card()
         payment_method = routes_page.get_payment_type().text
-        assert payment_method == "Tarjeta", "Se seleccionó pago en efectivo"  # Confirms the payment method is a credit card
+        assert payment_method == "Tarjeta", "Se seleccionó pago en efectivo"
+        routes_page.set_message_for_driver()
+        msg_for_driver = routes_page.get_message_for_driver()
+        assert msg_for_driver == data.message_for_driver
         routes_page.click_request_taxi()
         modal = routes_page.verify_taxi_request()
         assert modal == True
         taxi_info = routes_page.get_taxi_info()
-        assert taxi_info == True
+        assert taxi_info == True #Confirms a driver is assigned to the request
 
     @classmethod
     def teardown_class(cls):
