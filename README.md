@@ -1,6 +1,8 @@
 # Pruebas automatizadas de UI para la aplicación web de Urban Routes
 Pruebas automatizadas de UI para las características de Urban Routes al solicitar un taxi de categoría "Comfort". 
 
+Reporte de JIRA: https://drive.google.com/uc?id=1rqcf9nlp56UQTTyngQdeGd5wgGk_hPi-&export=download
+
 ### Requisitos:
 - Necesitas tener instalados el paquete pytest para ejecutar las pruebas.
 - Para instalar el paquete usa el comando pip pytest
